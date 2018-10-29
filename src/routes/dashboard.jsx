@@ -5,16 +5,16 @@ import Person from "@material-ui/icons/Person";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
-import Notifications from "@material-ui/icons/Notifications";
+import Receipt from "@material-ui/icons/Receipt";
 import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views
 import DashboardPage from "views/Dashboard/Dashboard.jsx";
 import UserProfile from "views/UserProfile/UserProfile.jsx";
 import TableList from "views/TableList/TableList.jsx";
-import Typography from "views/Typography/Typography.jsx";
-import Icons from "views/Icons/Icons.jsx";
-import Maps from "views/Maps/Maps.jsx";
-import NotificationsPage from "views/Notifications/Notifications.jsx";
+import NewWorkout from "views/NewWork/NewWork.jsx";
+import EditWorkout from "views/EditWorkout/EditWorkout.jsx";
+import EditExercise from "views/EditExercise/EditExercise.jsx";
+import NewExercise from "views/CreateExercise/CreateExercise.jsx";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.jsx";
 
 const dashboardRoutes = [
@@ -40,32 +40,32 @@ const dashboardRoutes = [
     component: TableList
   },
   {
-    path: "/typography",
-    sidebarName: "Typography",
-    navbarName: "Typography",
-    icon: LibraryBooks,
-    component: Typography
+    path: "/newworkout",
+    sidebarName: "New Workout",
+    navbarName: "New Workout",
+    icon: Receipt,
+    component: NewWorkout
   },
   {
-    path: "/icons",
-    sidebarName: "Icons",
-    navbarName: "Icons",
-    icon: BubbleChart,
-    component: Icons
+    path: "/editworkout",
+    sidebarName: "Edit Workout",
+    navbarName: "Edit Workout",
+    icon: Receipt,
+    component: EditWorkout
   },
   {
-    path: "/maps",
-    sidebarName: "Maps",
-    navbarName: "Map",
-    icon: LocationOn,
-    component: Maps
+    path: "/editexercise",
+    sidebarName: "Edit Exercise",
+    navbarName: "Edit Exercise",
+    icon: Receipt,
+    component: EditExercise
   },
   {
-    path: "/notifications",
-    sidebarName: "Notifications",
-    navbarName: "Notifications",
-    icon: Notifications,
-    component: NotificationsPage
+    path: "/create",
+    sidebarName: "New Exercise",
+    navbarName: "New Exercise",
+    icon: Receipt,
+    component: NewExercise
   },
   {
     path: "/upgrade-to-pro",

@@ -5,6 +5,10 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
 // core components
+
+
+import dashboardRoutes from "routes/dashboard.jsx";
+import authRoutes from "routes/auth.jsx"
 import footerStyle from "assets/jss/material-dashboard-react/components/footerStyle.jsx";
 
 function Footer({ ...props }) {
@@ -14,26 +18,19 @@ function Footer({ ...props }) {
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#home" className={classes.block}>
-                Home
+          {props.isAuth ? dashboardRoutes.map((item, index)=>{
+              return <ListItem className={classes.inlineBlock}>
+                <a href={item.path} className={classes.block}>
+                {item.sidebarName}
               </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#company" className={classes.block}>
-                Company
+              </ListItem>
+            }) : authRoutes.map((item, index)=>{
+              return <ListItem className={classes.inlineBlock}>
+                <a href={item.path} className={classes.block}>
+                {item.sidebarName}
               </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#portfolio" className={classes.block}>
-                Portfolio
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#blog" className={classes.block}>
-                Blog
-              </a>
-            </ListItem>
+              </ListItem>
+            })}
           </List>
         </div>
         <p className={classes.right}>

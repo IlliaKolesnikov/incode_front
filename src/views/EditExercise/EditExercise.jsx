@@ -3,14 +3,13 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import UpArrow from "@material-ui/icons/ArrowUpward";
-import DownArrow from "@material-ui/icons/ArrowDownward";
-import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
-import Snackbar from "components/Snackbar/Snackbar.jsx";
+import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 const styles = {
   cardCategoryWhite: {
@@ -39,20 +38,31 @@ const styles = {
       fontWeight: "400",
       lineHeight: "1"
     }
+  },
+  formControl: {
+    minWidth: 120,
   }
 };
 
 class EditExercise extends Component {
+  state = {
+    name: 'kilograms'
+  }
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
   render(){
     const { classes } = this.props;
     return(
-    <Card>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={8}>
+        <Card>
         <CardHeader color="primary">
           <h4 className={classes.cardTitleWhite}>Edit Exercise</h4>
         </CardHeader>
         <CardBody>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={3}>
+            <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Exercise name"
                     id="exercisename"
@@ -63,25 +73,42 @@ class EditExercise extends Component {
               
             </GridItem>
             <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Measurement type"
-                    id="measuretype"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
+        
+          <TextField
+          select
+            value={this.state.name}
+            onChange={this.handleChange}
+            name="name"
+            inputProps={{
+              id: 'name-required',
+            }}
+            inputStyle={{ alignSelf: 'flex-end', marginLeft: 20, width: 150 }}
+            fullWidth={true}
+            className={classes.selectEmpty}
+          >
+
+            <MenuItem value="hai">Hai</MenuItem>
+            <MenuItem value="olivier">Olivier</MenuItem>
+            <MenuItem value="kevin">Kevin</MenuItem>
+            
+          </TextField>
+
             </GridItem>
-            <Button color="info" ></Button>
-            <Button color="info" ></Button>
-            <Button color="warning"></Button>
+            <Button color="info" > <ArrowUpward /> </Button>
+            <Button color="info" > <ArrowDownward /> </Button>
+            <Button color="warning"><AddCircle /> </Button>
           </GridContainer>
           <GridContainer>
-              <Button color="primary">Create exercise</Button>
+              <Button color="primary">
+              <ArrowUpward />
+              Create exercise</Button>
           </GridContainer>
- 
+
 
         </CardBody>
-      </Card>)
+      </Card>
+      </GridItem>
+      </GridContainer>)
   }
 }
 

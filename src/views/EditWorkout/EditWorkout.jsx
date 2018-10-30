@@ -3,10 +3,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import UpArrow from "@material-ui/icons/ArrowUpward";
-import DownArrow from "@material-ui/icons/ArrowDownward";
-import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
-import Snackbar from "components/Snackbar/Snackbar.jsx";
+import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -46,6 +43,8 @@ class EditWorkout extends Component {
   render(){
     const { classes } = this.props;
     return(
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={8}>
         <Card>
         <CardHeader color="primary">
           <h4 className={classes.cardTitleWhite}>Edit workout</h4>
@@ -84,9 +83,44 @@ class EditWorkout extends Component {
                   />
                   
             </GridItem>
-            <Button color="info" ></Button>
-            <Button color="info" ></Button>
-            <Button color="warning"></Button>
+            <Button color="info" > <ArrowUpward /> </Button>
+            <Button color="info" > <ArrowDownward /> </Button>
+            <Button color="warning"><AddCircle /> </Button>
+          </GridContainer>
+
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={2}>
+                  <CustomInput
+                    labelText="Exercise name"
+                    id="exercisename"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+              
+            </GridItem>
+            <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="Repeats"
+                    id="repeat"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="Measurement"
+                    id="measuretype"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                  
+            </GridItem>
+            <Button color="info" > <ArrowUpward /> </Button>
+            <Button color="info" > <ArrowDownward /> </Button>
+            <Button color="warning"><AddCircle /> </Button>
           </GridContainer>
           <GridContainer>
               <Button color="primary">Upgrade workout</Button>
@@ -94,7 +128,10 @@ class EditWorkout extends Component {
  
 
         </CardBody>
-      </Card>)
+      </Card>
+      
+     </GridItem>
+        </GridContainer> )
   }
 }
 

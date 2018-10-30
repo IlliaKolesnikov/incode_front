@@ -79,6 +79,8 @@ class NewExercise extends React.Component {
   render() {
     const { classes } = this.props;
     return (
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={8}>
       <Card>
         <CardHeader color="primary">
           <h4 className={classes.cardTitleWhite}>Create new Exercise</h4>
@@ -89,7 +91,7 @@ class NewExercise extends React.Component {
         </CardHeader>
         <CardBody>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={3}>
+            <GridItem xs={12} sm={12} md={12}>
                   <CustomInput
                     labelText="Exercise name"
                     id="exercisename"
@@ -100,7 +102,7 @@ class NewExercise extends React.Component {
             </GridItem>
           </GridContainer>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={3}>
+            <GridItem xs={12} sm={12} md={12}>
                   <CustomInput
                     labelText="Measurement type"
                     id="measuretype"
@@ -117,6 +119,8 @@ class NewExercise extends React.Component {
 
         </CardBody>
       </Card>
+      </GridItem>
+      </GridContainer> 
     );
   }
 }

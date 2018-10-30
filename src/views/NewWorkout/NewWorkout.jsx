@@ -1,69 +1,103 @@
-import React from "react";
-import PropTypes from "prop-types";
-// @material-ui/core components
+import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Hidden from "@material-ui/core/Hidden";
-// core components
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
+import Button from "components/CustomButtons/Button.jsx";
+import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
 
-import iconsStyle from "assets/jss/material-dashboard-react/views/iconsStyle.jsx";
-
-function Icons(props) {
-  const { classes } = props;
-  return (
-    <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card plain>
-          <CardHeader plain color="primary">
-            <h4 className={classes.cardTitleWhite}>Material Design Icons</h4>
-            <p className={classes.cardCategoryWhite}>
-              Handcrafted by our friends from{" "}
-              <a
-                href="https://design.google.com/icons/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Illia kolesnikov
-              </a>
-            </p>
-          </CardHeader>
-          <CardBody>
-            <Hidden only={["sm", "xs"]}>
-              <iframe
-                className={classes.iframe}
-                src="https://material.io/icons/"
-                title="Icons iframe"
-              >
-                <p>Your browser does not support iframes.</p>
-              </iframe>
-            </Hidden>
-            <Hidden only={["lg", "md"]}>
-              <GridItem xs={12} sm={12} md={6}>
-                <h5>
-                  check this out
-                  <a
-                    href="https://design.google.com/icons/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Material Icons
-                  </a>
-                </h5>
-              </GridItem>
-            </Hidden>
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
-  );
-}
-
-Icons.propTypes = {
-  classes: PropTypes.object.isRequired
+const styles = {
+  
+  cardCategoryWhite: {
+    "&,& a,& a:hover,& a:focus": {
+      color: "rgba(255,255,255,.62)",
+      margin: "0",
+      fontSize: "14px",
+      marginTop: "0",
+      marginBottom: "0"
+    },
+    "& a,& a:hover,& a:focus": {
+      color: "#FFFFFF"
+    }
+  },
+  cardTitleWhite: {
+    color: "#FFFFFF",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+    marginBottom: "3px",
+    textDecoration: "none",
+    "& small": {
+      color: "#777",
+      fontSize: "65%",
+      fontWeight: "400",
+      lineHeight: "1"
+    }
+  }
 };
 
-export default withStyles(iconsStyle)(Icons);
+class EditExercise extends Component {
+  render(){
+    const { classes } = this.props;
+    return(
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={8}>
+        <Card>
+        <CardHeader color="primary">
+          <h4 className={classes.cardTitleWhite}>New workout</h4>
+        </CardHeader>
+        <CardBody>
+        <GridContainer>
+            <Button color="primary">Add exercise</Button>
+        </GridContainer>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={2}>
+                  <CustomInput
+                    labelText="Exercise name"
+                    id="exercisename"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+              
+            </GridItem>
+            <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="Repeats"
+                    id="repeat"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="Measurement"
+                    id="measuretype"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                  
+            </GridItem>
+            <Button color="info" > <ArrowUpward /> </Button>
+            <Button color="info" > <ArrowDownward /> </Button>
+            <Button color="warning"><AddCircle /> </Button>
+          </GridContainer>
+          <GridContainer>
+              <Button color="primary">Create workout</Button>
+          </GridContainer>
+        </CardBody>
+      </Card>
+      </GridItem>
+        </GridContainer> )
+  }
+}
+
+
+
+export default withStyles(styles)(EditExercise);

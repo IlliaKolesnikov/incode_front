@@ -10,6 +10,7 @@ import CardBody from "components/Card/CardBody.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
 
 const styles = {
   cardCategoryWhite: {
@@ -45,23 +46,28 @@ const styles = {
 };
 
 class EditExercise extends Component {
-  state = {
-    name: 'kilograms'
+  constructor(props){
+    super(props);
+    this.state = {
+      measure: 'kilograms'
+    }
   }
+  
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ measure: event.target.value });
   };
+
   render(){
     const { classes } = this.props;
     return(
-      <GridContainer>
+      <GridContainer >
         <GridItem xs={12} sm={12} md={8}>
         <Card>
         <CardHeader color="primary">
           <h4 className={classes.cardTitleWhite}>Edit Exercise</h4>
         </CardHeader>
         <CardBody>
-          <GridContainer>
+          <GridContainer alignItems="flex-end">
             <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Exercise name"
@@ -74,25 +80,22 @@ class EditExercise extends Component {
             </GridItem>
             <GridItem xs={12} sm={12} md={3}>
         
+          
           <TextField
-          select
-            value={this.state.name}
+            id="measure"
+            select
+            value={this.state.measure}
+            fullWidth
             onChange={this.handleChange}
-            name="name"
-            inputProps={{
-              id: 'name-required',
-            }}
-            inputStyle={{ alignSelf: 'flex-end', marginLeft: 20, width: 150 }}
-            fullWidth={true}
-            className={classes.selectEmpty}
           >
 
-            <MenuItem value="hai">Hai</MenuItem>
-            <MenuItem value="olivier">Olivier</MenuItem>
-            <MenuItem value="kevin">Kevin</MenuItem>
+            <MenuItem value="kilograms">Kilograms</MenuItem>
+            <MenuItem value="minutes">Minutes</MenuItem>
+            <MenuItem value="miles">Miles</MenuItem>
             
+        
           </TextField>
-
+          
             </GridItem>
             <Button color="info" > <ArrowUpward /> </Button>
             <Button color="info" > <ArrowDownward /> </Button>

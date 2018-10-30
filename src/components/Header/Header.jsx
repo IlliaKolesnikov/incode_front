@@ -18,13 +18,26 @@ import headerStyle from "assets/jss/material-dashboard-react/components/headerSt
 function Header({ ...props }) {
   function makeBrand() {
     var name;
-    props.routes.map((prop, key) => {
+    props.isAuth ? props.dashboardRoutes.map((prop, key) => {
+      if (prop.path === props.location.pathname) {
+        name = prop.navbarName;
+      }
+      return null;
+    }) : props.authRoutes.map((prop, key) => {
       if (prop.path === props.location.pathname) {
         name = prop.navbarName;
       }
       return null;
     });
-    return name;
+
+    return name
+   /* props.routes.map((prop, key) => {
+      if (prop.path === props.location.pathname) {
+        name = prop.navbarName;
+      }
+      return null;
+    });
+    return name;*/
   }
   const { classes, color } = props;
   const appBarClasses = classNames({
@@ -40,7 +53,9 @@ function Header({ ...props }) {
           </Button>
         </div>
         <Hidden smDown implementation="css">
-          <HeaderLinks />
+          <HeaderLinks 
+          visible={props.isAuth ? true : false}
+          />
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton

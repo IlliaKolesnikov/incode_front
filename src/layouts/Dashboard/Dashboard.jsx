@@ -94,14 +94,16 @@ class App extends React.Component {
         />
         <div className={classes.mainPanel} ref="mainPanel">
           <Header
+            isAuth={isAuth}
+            dashboardRoutes={dashboardRoutes}
+            authRoutes={authRoutes}
             routes={isAuth ? dashboardRoutes : authRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
-          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           { isAuth ? 
           (<div className={classes.map}>{switchRoutes}</div>) 
-          : (<div className={classes.map}>{authorRoutes}</div>)}
+          :(<div className={classes.map}>{authorRoutes}</div>)}
           
           {this.getRoute() ? <Footer isAuth={isAuth}/> : null}
         </div>

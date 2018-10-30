@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom'
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import ListItem from "@material-ui/core/ListItem";
@@ -17,18 +18,18 @@ function Footer({ ...props }) {
     <footer className={classes.footer}>
       <div className={classes.container}>
         <div className={classes.left}>
-          <List className={classes.list}>
+          <List className={classes.list} >
           {props.isAuth ? dashboardRoutes.map((item, index)=>{
               return <ListItem className={classes.inlineBlock}>
-                <a href={item.path} className={classes.block}>
+                <Link to={item.path} className={classes.block}>
                 {item.sidebarName}
-              </a>
+              </Link>
               </ListItem>
             }) : authRoutes.map((item, index)=>{
               return <ListItem className={classes.inlineBlock}>
-                <a href={item.path} className={classes.block}>
+                <Link to={item.path} className={classes.block}>
                 {item.sidebarName}
-              </a>
+              </Link>
               </ListItem>
             })}
           </List>

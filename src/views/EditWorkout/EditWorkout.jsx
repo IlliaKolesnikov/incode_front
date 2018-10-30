@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+import FormLabel from '@material-ui/core/FormLabel';
 import withStyles from "@material-ui/core/styles/withStyles";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from "components/CustomButtons/Button.jsx";
 import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+import Divider from '@material-ui/core/Divider';
+
 
 const styles = {
   cardCategoryWhite: {
@@ -53,7 +57,7 @@ class EditWorkout extends Component {
         <GridContainer>
             <Button color="primary">Add exercise</Button>
         </GridContainer>
-          <GridContainer>
+          <GridContainer alignItems="flex-end">
             <GridItem xs={12} sm={12} md={2}>
                   <CustomInput
                     labelText="Exercise name"
@@ -83,12 +87,15 @@ class EditWorkout extends Component {
                   />
                   
             </GridItem>
+            <GridItem>
+            <FormLabel component="legend">kg</FormLabel>
+            </GridItem>
             <Button color="info" > <ArrowUpward /> </Button>
             <Button color="info" > <ArrowDownward /> </Button>
             <Button color="warning"><AddCircle /> </Button>
           </GridContainer>
-
-          <GridContainer>
+          <Divider />
+          <GridContainer alignItems="flex-end">
             <GridItem xs={12} sm={12} md={2}>
                   <CustomInput
                     labelText="Exercise name"
@@ -118,13 +125,14 @@ class EditWorkout extends Component {
                   />
                   
             </GridItem>
+            <GridItem >
+            <FormLabel component="legend">kg</FormLabel>
+            </GridItem>
             <Button color="info" > <ArrowUpward /> </Button>
             <Button color="info" > <ArrowDownward /> </Button>
             <Button color="warning"><AddCircle /> </Button>
           </GridContainer>
-          <GridContainer>
-              <Button color="primary">Upgrade workout</Button>
-          </GridContainer>
+          
  
 
         </CardBody>

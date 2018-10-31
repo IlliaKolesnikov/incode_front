@@ -15,23 +15,23 @@ import footerStyle from "assets/jss/material-dashboard-react/components/footerSt
 function Footer({ ...props }) {
   const { classes } = props;
   return (
-    <footer className={classes.footer}>
+    <footer style={{marginTop: "5vh"}}className={classes.footer}>
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list} >
-          {props.isAuth ? dashboardRoutes.map((item, index)=>{
-              return <ListItem className={classes.inlineBlock}>
-                <Link to={item.path} className={classes.block}>
-                {item.sidebarName}
-              </Link>
-              </ListItem>
-            }) : authRoutes.map((item, index)=>{
-              return <ListItem className={classes.inlineBlock}>
-                <Link to={item.path} className={classes.block}>
-                {item.sidebarName}
-              </Link>
-              </ListItem>
-            })}
+                {props.isAuth ? dashboardRoutes.map((item, index)=>{
+                    return <ListItem className={classes.inlineBlock}>
+                      <Link to={item.path} className={classes.block}>
+                      {item.sidebarName}
+                    </Link>
+                    </ListItem>
+                  }) : authRoutes.map((item, index)=>{
+                    return <ListItem className={classes.inlineBlock}>
+                      <Link to={item.path} className={classes.block}>
+                      {item.sidebarName}
+                    </Link>
+                    </ListItem>
+                  })}
           </List>
         </div>
         <p className={classes.right}>

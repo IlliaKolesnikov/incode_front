@@ -3,11 +3,14 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField';
+import FormLabel from '@material-ui/core/FormLabel';
 import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
+import Table from "components/Table/Table.jsx";
 
 const styles = {
   
@@ -37,59 +40,111 @@ const styles = {
       fontWeight: "400",
       lineHeight: "1"
     }
+  },
+  buttonPadding: {
+    padding: "10px 18px"
+  },
+  addExercise: {
+    marginLeft: "1.5vw",
+    marginBottom: "2vh"
+  }, 
+  createWorkout: {
+    marginLeft: "0.5vw",
+    marginTop: "2vh"
   }
 };
 
 class EditExercise extends Component {
+
+  state = {
+    arr: [{
+      name: "Gym",
+      repeats: 15,
+      measure: "kilograms",
+    },
+    {
+      name: "Running",
+      repeats: 1,
+      measure: "miles"
+    },
+    {
+      name: "Lifting",
+      repeats: 25,
+      measure: "kilograms"
+    },
+    {
+      name: "Something else",
+      repeats: 5,
+      measure: "minutes"
+    }
+  ]
+  }
+
+  handleChange = (index, attribute) => event =>{
+    let a = this.state.arr.slice(); 
+    a[index][attribute] = event.target.value;
+    this.setState({arr: a});
+  }
   render(){
     const { classes } = this.props;
     return(
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={10}>
         <Card>
         <CardHeader color="primary">
           <h4 className={classes.cardTitleWhite}>New workout</h4>
         </CardHeader>
         <CardBody>
         <GridContainer>
-            <Button color="primary">Add exercise</Button>
+            <Button color="primary"className={classes.addExercise}>Add exercise</Button>
         </GridContainer>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={2}>
-                  <CustomInput
-                    labelText="Exercise name"
-                    id="exercisename"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
+        <Grid container alignItems="center">
+            <Table
+                  tableHeaderColor="warning"
+                  tableData= {this.state.arr.map((item, index)=> [
+                        <TextField
+                              id="name"
+                              label="Exercise name"
+                              value={item.name}
+                            
+                              onChange={this.handleChange(index, 'name')}
+                               />,
+
+
+                        <TextField
+                                id="repeat"
+                                label="Repeats"
+                                value={item.repeats}
+                               
+                                onChange={this.handleChange(index, 'repeats')}
+                              />,
+
+                              
+                        [<TextField
+                                id="measure"
+                                label="Measurement"
+                                value={item.measure}
+                                onChange={this.handleChange(index, 'measure')}
+                              />,
+                        <FormLabel> kg</FormLabel>],
+                       
+                      [
+                        <Button color="info" > <ArrowUpward /> </Button>,
+                       
+                        <Button color="info" > <ArrowDownward /> </Button>,
+                       
+                        <Button color="warning"><AddCircle /> </Button>
+                      ]
+                       
+                      
+                  ]
+                  )}
+               
               
-            </GridItem>
-            <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Repeats"
-                    id="repeat"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-            </GridItem>
-            <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Measurement"
-                    id="measuretype"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                  
-            </GridItem>
-            <Button color="info" > <ArrowUpward /> </Button>
-            <Button color="info" > <ArrowDownward /> </Button>
-            <Button color="warning"><AddCircle /> </Button>
-          </GridContainer>
+                />
+                </Grid>
           <GridContainer>
-              <Button color="primary">Create workout</Button>
+              <Button color="primary" className={classes.createWorkout}>Create workout</Button>
           </GridContainer>
         </CardBody>
       </Card>

@@ -19,7 +19,6 @@ var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() -
 
 class Dashboard extends React.Component {
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <GridContainer>

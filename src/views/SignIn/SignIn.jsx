@@ -1,8 +1,10 @@
-import React from "react";
+import React, {Component} from "react";
+import {Link} from 'react-router-dom'
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+import TextField from "@material-ui/core/TextField"
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -28,8 +30,30 @@ const styles = {
   
 };
 
-function SignIn(props) {
-  const { classes } = props;
+class SignIn extends Component{
+
+  
+  /*handleChange = field => event =>{
+    this.setState({field: event.target.value})
+  }*/
+  state = {
+    password: "",
+    mail: ""
+  }
+
+  onPasswordChange = (event) =>{
+    this.setState({password: event.target.value})
+  }
+
+  onMailChange = (event) =>{
+    this.setState({mail: event.target.value})
+  }
+  onBtnClick = () =>{
+    console.log(this.state)
+  }
+  render(){
+  
+  const { classes } = this.props;
   return (
     <div>
       <GridContainer>
@@ -45,10 +69,14 @@ function SignIn(props) {
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Email adress"
-                    id="email-address"
+                    id="mail"
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      onChange: this.onMailChange
+                    }}
+                    
                   />
                 </GridItem>
                     </GridContainer>
@@ -60,16 +88,24 @@ function SignIn(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      onChange: this.onPasswordChange
+                    }}
+                    //onChange={e => this.setState({ password: e.target.value })}
                   />
                 </GridItem>
 
                     </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary">Sign in</Button>
-              <a href="localhost:3000/signup" className={classes.a}>
-              first time user? sign up
-            </a>
+              <Button color="primary" onClick={() =>
+                    this.props.signIn(this.state.mail, this.state.password)
+  }>
+
+  Sign in</Button>
+            <Link to={"/signup"} >
+            first time user? sign up
+                    </Link>
             </CardFooter>
           </Card>
         </GridItem>
@@ -77,6 +113,7 @@ function SignIn(props) {
       </GridContainer>
     </div>
   );
+                  }
 }
 
 export default withStyles(styles)(SignIn);

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
@@ -77,9 +78,9 @@ function SignUp(props) {
             </CardBody>
             <CardFooter>
               <Button color="primary">Sign up</Button>
-              <a href="localhost:3000/signin" className={classes.a}>
-              Already have an account? Sign in
-            </a>
+            <Link to={"/signin"} >
+            Already have an account? Sign in
+                    </Link>
             </CardFooter>
           </Card>
         </GridItem>

@@ -20,13 +20,13 @@ function Footer({ ...props }) {
         <div className={classes.left}>
           <List className={classes.list} >
                 {props.isAuth ? dashboardRoutes.map((item, index)=>{
-                    return <ListItem className={classes.inlineBlock}>
+                    return <ListItem key={index} className={classes.inlineBlock}>
                       <Link to={item.path} className={classes.block}>
                       {item.sidebarName}
                     </Link>
                     </ListItem>
                   }) : authRoutes.map((item, index)=>{
-                    return <ListItem className={classes.inlineBlock}>
+                    return <ListItem key={index} className={classes.inlineBlock}>
                       <Link to={item.path} className={classes.block}>
                       {item.sidebarName}
                     </Link>

@@ -1,6 +1,8 @@
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+import {connect} from 'react-redux'
+import {signOut} from '../../actions/signActions'
 import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
@@ -33,6 +35,7 @@ class HeaderLinks extends React.Component {
     }
 
     this.setState({ open: false });
+    this.props.signOut()
   };
 
   render() {
@@ -64,11 +67,9 @@ class HeaderLinks extends React.Component {
                 style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
               >
                 <Paper>
-                  <ClickAwayListener onClickAway={this.handleClose}>
                     <MenuList>
                       <MenuItem onClick={this.handleClose}>Sign Out</MenuItem>
                     </MenuList>
-                  </ClickAwayListener>
                 </Paper>
               </Grow>
             )}
@@ -86,4 +87,15 @@ class HeaderLinks extends React.Component {
 }
 }
 
-export default withStyles(headerLinksStyle)(HeaderLinks);
+function mapStateToProps(state){
+  return {
+    sign: state
+  }
+}
+function mapDispatchToProps(dispatch){
+  return{
+    signOut: ()=>dispatch(signOut())
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)
+(withStyles(headerLinksStyle)(HeaderLinks));

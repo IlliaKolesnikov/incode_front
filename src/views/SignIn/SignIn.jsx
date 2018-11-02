@@ -4,7 +4,6 @@ import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import TextField from "@material-ui/core/TextField"
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -91,18 +90,14 @@ class SignIn extends Component{
                     inputProps={{
                       onChange: this.onPasswordChange
                     }}
-                    //onChange={e => this.setState({ password: e.target.value })}
                   />
                 </GridItem>
 
                     </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary" onClick={() =>
-                    this.props.signIn(this.state.mail, this.state.password)
-  }>
-
-  Sign in</Button>
+              <Button color="primary" onClick={()=>this.props.signIn(this.state.mail, this.state.password)}>
+                    Sign in</Button>
             <Link to={"/signup"} >
             first time user? sign up
                     </Link>

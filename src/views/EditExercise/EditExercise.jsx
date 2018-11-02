@@ -103,7 +103,6 @@ class EditExercise extends Component{
                    <TextField
                    id="measure"
                    select
-                   fullwidth
                    value={item.measure}
                    onChange={this.handleChange(index, 'measure')}
                  >

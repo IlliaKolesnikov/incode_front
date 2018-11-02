@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import SignIn from "views/SignIn/SignIn.jsx";
-import {signIn} from '../actions/signActions'
+import {signIn } from '../actions/signActions'
 
 function mapStateToProps(state){
     return{
@@ -10,7 +10,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return{
-        signIn: (userName, userPassword)=>dispatch(signIn(userName, userPassword))
+        signIn: (userName, userPassword)=>dispatch(signIn(userName, userPassword)),
     }
 }
 

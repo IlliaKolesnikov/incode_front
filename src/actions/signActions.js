@@ -27,3 +27,14 @@ export function signOut(userName, userPassword){
         dispatch({type: "LOG_OUT"})
     }
 }
+
+
+export function signUp(userName, userPassword){
+    return dispatch=>{
+            axios.post("/api/signup", {
+                username: userName,
+                password: userPassword
+            })
+    }
+
+}

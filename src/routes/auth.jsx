@@ -3,7 +3,7 @@ import Person from "@material-ui/icons/Person";
 // import ContentPaste from "@material-ui/icons/ContentPaste";
 // core components/views
 import SignIn from "containers/signin.js";
-import SignUp from "views/SignUp/SignUp.jsx";
+import SignUp from "containers/signup.js";
 
 const authRoutes = [
   {

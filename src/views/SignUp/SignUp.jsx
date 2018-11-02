@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {Link} from 'react-router-dom'
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -7,9 +7,12 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import Snackbar from '@material-ui/core/Snackbar';
 import CardFooter from "components/Card/CardFooter.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
-const styles = {
+import CustomSnack from 'components/CustomSnackBar/CustomSnack.jsx'
+
+const styles = theme =>({
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
     margin: "0",
@@ -26,10 +29,39 @@ const styles = {
     marginBottom: "3px",
     textDecoration: "none"
   }
-};
+});
 
-function SignUp(props) {
-  const { classes } = props;
+
+class SignUp extends Component{
+  state = {
+    mail: "",
+    password: "",
+    repeatPassword: "",
+    isShow: false
+  }
+  onRepeatCheck = () =>{
+
+    if(this.state.password === this.state.repeatPassword){
+      this.setState({isShow: false})
+      this.props.signUp(this.state.mail, this.state.password);
+    }
+    else{
+      this.setState({isShow: true})
+    }
+  }
+  
+  onMailChange = (event) =>{
+    this.setState({mail: event.target.value})
+  }
+  onPasswordChange = (event) =>{
+    this.setState({password: event.target.value})
+  }
+  onRepeatPasswordChange = (event) =>{
+    this.setState({repeatPassword: event.target.value})
+  }
+  
+  render(){
+  const { classes } = this.props;
   return (
     <div>
       <GridContainer>
@@ -40,6 +72,7 @@ function SignUp(props) {
               <p className={classes.cardCategoryWhite}>Please enter your email and password</p>
             </CardHeader>
             <CardBody>
+              
             <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
@@ -47,6 +80,9 @@ function SignUp(props) {
                     id="email-address"
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: this.onMailChange
                     }}
                   />
                 </GridItem>
@@ -58,7 +94,11 @@ function SignUp(props) {
                     labelText="Password"
                     id="password"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      onChange: this.onPasswordChange
+                      //type: "oassword"
                     }}
                   />
                 </GridItem>
@@ -72,12 +112,16 @@ function SignUp(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      onChange: this.onRepeatPasswordChange
+                    }}
                   />
+                  {this.state.isShow ? "The password isn't correct. Please try again" :  null}
                 </GridItem>
             </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary">Sign up</Button>
+              <Button color="primary" onClick={this.onRepeatCheck}>Sign up</Button>
             <Link to={"/signin"} >
             Already have an account? Sign in
                     </Link>
@@ -88,6 +132,7 @@ function SignUp(props) {
       </GridContainer>
     </div>
   );
+}
 }
 
 export default withStyles(styles)(SignUp);

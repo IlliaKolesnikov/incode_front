@@ -8,7 +8,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper'
@@ -97,5 +96,4 @@ function mapDispatchToProps(dispatch){
     signOut: ()=>dispatch(signOut())
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)
-(withStyles(headerLinksStyle)(HeaderLinks));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(headerLinksStyle)(HeaderLinks));

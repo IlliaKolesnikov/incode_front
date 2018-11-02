@@ -47,9 +47,6 @@ class SignIn extends Component{
   onMailChange = (event) =>{
     this.setState({mail: event.target.value})
   }
-  onBtnClick = () =>{
-    console.log(this.state)
-  }
   render(){
   
   const { classes } = this.props;

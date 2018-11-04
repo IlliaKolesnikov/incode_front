@@ -28,6 +28,7 @@ const styles = {
 };
 
 function Verification(props) {
+  console.log(props.match.params)
   const { classes } = props;
   return (
     <div>
@@ -49,6 +50,10 @@ function Verification(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      value: props.match.params['0'],
+                      disabled: true
+                    }}
                   />
                 </GridItem>
             </GridContainer>
@@ -61,12 +66,16 @@ function Verification(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      value: props.match.params['1'],
+                      disabled: true
+                    }}
                   />
                 </GridItem>
              </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary">Verify email</Button>
+              <Button color="primary" onClick={props.verifyUser(props.match.params['0'])}>Verify email</Button>
               <a href="localhost:3000/signin" className={classes.a}>
               already have an account? Sign in
             </a>

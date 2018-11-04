@@ -28,6 +28,14 @@ export function signOut(userName, userPassword){
     }
 }
 
+export function verifyUser(mail){
+    return dispatch => {
+        axios.post('/api/verify', {
+            username: mail
+        })
+    }
+}
+
 
 export function signUp(userName, userPassword){
     return dispatch=>{
@@ -35,6 +43,8 @@ export function signUp(userName, userPassword){
                 username: userName,
                 password: userPassword
             })
+            .catch(error=> {console.log(error.response) //2 минуты
+                console.log(error.response.data.error)})
     }
 
 }

@@ -1,5 +1,6 @@
 const initialState = {
-    isAuth: false
+    isAuth: false,
+    error: null
 }
 
 function main(state = initialState, action){
@@ -8,6 +9,8 @@ function main(state = initialState, action){
             return {...state, isAuth: true} // POCHTA I TOKEN
         case "LOG_OUT":
             return {...state, isAuth: false}
+        case "ERROR_FOUND":
+            return {...state, error: action.payload}
         default: 
             return state
     }

@@ -52,9 +52,6 @@ class App extends React.Component {
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
-  getRoute() {
-    return this.props.location.pathname !== "/maps";
-  }
   resizeFunction() {
     if (window.innerWidth >= 960) {
       this.setState({ mobileOpen: false });
@@ -105,7 +102,7 @@ class App extends React.Component {
           (<div className={classes.map}>{switchRoutes}</div>) 
           :(<div className={classes.map}>{authorRoutes}</div>)}
           
-          {this.getRoute() ? <Footer isAuth={isAuth}/> : null}
+           <Footer isAuth={isAuth}/>
         </div>
       </div>
     );

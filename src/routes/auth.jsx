@@ -5,8 +5,8 @@ import Person from "@material-ui/icons/Person";
 import SignIn from "containers/signin.js";
 import SignUp from "containers/signup.js";
 import Verification from "containers/email.js";
-var pathToRegexp = require('path-to-regexp')
-const verifPath = pathToRegexp("/verify")
+const pathToRegexp = require('path-to-regexp')
+
 const authRoutes = [
   {
     path: "/signin",
@@ -27,6 +27,7 @@ const authRoutes = [
     path: pathToRegexp("/verify/:data/:token"),
     sidebarName: "Verification",
     navbarName: "Verification",
+    invisible: true,
     icon: Person,
     component: Verification
   },

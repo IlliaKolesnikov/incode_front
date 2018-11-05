@@ -78,6 +78,32 @@ class EditWorkout extends Component{
   ]
   }
 
+  moveUpper = (index) => () =>{
+    let a = this.state.arr.slice();
+    if(index !== 0){
+    let k = a[index-1];
+    a[index-1] = a[index];
+    a[index] = k;
+    this.setState({arr: a})
+  }
+  }
+
+  moveDown = (index) => () =>{
+    let a = this.state.arr.slice();
+    if(index !== this.state.arr.length-1){
+      let k = a[index+1];
+      a[index+1] = a[index];
+      a[index] = k;
+      this.setState({arr: a})
+    }
+  }
+
+  deleteOne = (index) => () =>{
+    let a = this.state.arr.slice();
+    delete a[index];
+    this.setState({arr: a})
+  }
+
   handleChange = (index, attribute) => event =>{
     let a = this.state.arr.slice(); 
     a[index][attribute] = event.target.value;
@@ -126,11 +152,11 @@ class EditWorkout extends Component{
                         <FormLabel> kg</FormLabel>],
                        
                       [
-                        <Button color="info" > <ArrowUpward /> </Button>,
-                       
-                        <Button color="info" > <ArrowDownward /> </Button>,
-                       
-                        <Button color="warning"><AddCircle /> </Button>
+                        <Button color="info" onClick={this.moveUpper(index)}> <ArrowUpward /> </Button>,
+           
+                        <Button color="info" onClick={this.moveDown(index)}> <ArrowDownward /> </Button>,
+           
+                        <Button color="warning" onClick={this.deleteOne(index)}><AddCircle  /> </Button>
                       ]
                        
                       

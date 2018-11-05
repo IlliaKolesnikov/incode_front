@@ -48,7 +48,9 @@ class SignIn extends Component{
     this.setState({mail: event.target.value})
   }
   render(){
-  
+    if(this.props.sign.error){
+      console.log(this.props.sign.error)
+    }
   const { classes } = this.props;
   return (
     <div>
@@ -95,9 +97,8 @@ class SignIn extends Component{
             <CardFooter>
               <Button color="primary" onClick={()=>this.props.signIn(this.state.mail, this.state.password)}>
                     Sign in</Button>
-            <Link to={"/signup"} >
-            first time user? sign up
-                    </Link>
+                   
+            <div><Link to={"/signup"} >First time user? Sign up</Link> </div>
             </CardFooter>
           </Card>
         </GridItem>

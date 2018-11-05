@@ -15,7 +15,12 @@ export function signIn(userName, userPassword){
         })
         
     })
-    .catch(error=> console.log(error.response.data.error))
+    .catch(error=> {
+        dispatch({type: "ERROR_FOUND", 
+                payload: error.response.data.error}) 
+        //console.log(error.response.data.error)
+    }
+        )
        
     }
 }
@@ -33,6 +38,19 @@ export function verifyUser(mail){
         axios.post('/api/verify', {
             username: mail
         })
+        .then(json => { 
+            window.localStorage.setItem('token', json.data.data)
+            dispatch({
+                type: "AUTH_SUCCESS"
+            })
+        })
+        .catch(error=> {
+            dispatch({type: "ERROR_FOUND", 
+                    payload: error.response.data.error}) 
+            console.log(error.response.data.error)}
+            )
+        
+    
     }
 }
 
@@ -43,8 +61,9 @@ export function signUp(userName, userPassword){
                 username: userName,
                 password: userPassword
             })
-            .catch(error=> {console.log(error.response) //2 минуты
-                console.log(error.response.data.error)})
+            .catch(error=> {
+            dispatch({type: "ERROR_FOUND", 
+                payload: error.response.data.error}) //2 минуты
+            })
     }
-
 }

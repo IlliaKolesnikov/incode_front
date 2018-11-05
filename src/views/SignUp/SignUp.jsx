@@ -122,9 +122,7 @@ class SignUp extends Component{
             </CardBody>
             <CardFooter>
               <Button color="primary" onClick={this.onRepeatCheck}>Sign up</Button>
-            <Link to={"/signin"} >
-            Already have an account? Sign in
-                    </Link>
+              <div><Link to={"/signin"} > Already have an account? Sign in</Link></div>
             </CardFooter>
           </Card>
         </GridItem>

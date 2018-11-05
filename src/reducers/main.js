@@ -1,14 +1,15 @@
 const initialState = {
     isAuth: false,
-    error: null
+    error: null, 
+    mail: null
 }
 
 function main(state = initialState, action){
     switch(action.type){
         case "AUTH_SUCCESS":
-            return {...state, isAuth: true} // POCHTA I TOKEN
+            return {...state, isAuth: true, mail: action.payload} // POCHTA I TOKEN
         case "LOG_OUT":
-            return {...state, isAuth: false}
+            return {...state, isAuth: false, mail: null}
         case "ERROR_FOUND":
             return {...state, error: action.payload}
         default: 

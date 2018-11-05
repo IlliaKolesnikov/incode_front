@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
@@ -75,9 +76,9 @@ function Verification(props) {
             </CardBody>
             <CardFooter>
               <Button color="primary" onClick={() => props.verifyUser(props.match.params['0'])}>Verify email</Button>
-              <a href="localhost:3000/signin" className={classes.a}>
-              already have an account? Sign in
-            </a>
+              <div><Link to="localhost:3000/signin" className={classes.a}>
+              Already have an account? Sign in
+            </Link></div>
             </CardFooter>
           </Card>
         </GridItem>

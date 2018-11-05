@@ -5,6 +5,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import GridItem from "components/Grid/GridItem.jsx";
+import Grid from '@material-ui/core/Grid'
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
@@ -117,6 +118,7 @@ class EditExercise extends Component{
           <h4 className={classes.cardTitleWhite}>Edit Exercise</h4>
         </CardHeader>
         <CardBody>
+          <Grid container alignItems="flex-end">
           <Table 
           tableData={this.state.arr.map((item, index)=> [
             <TextField
@@ -149,6 +151,7 @@ class EditExercise extends Component{
       ]
       )}
           />
+          </Grid>
       </CardBody>
       </Card>
       </GridItem>

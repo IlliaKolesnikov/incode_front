@@ -5,7 +5,7 @@ import Person from "@material-ui/icons/Person";
 import SignIn from "containers/signin.js";
 import SignUp from "containers/signup.js";
 import Verification from "containers/email.js";
-const pathToRegexp = require('path-to-regexp')
+import pathToRegexp from 'path-to-regexp'
 
 const authRoutes = [
   {

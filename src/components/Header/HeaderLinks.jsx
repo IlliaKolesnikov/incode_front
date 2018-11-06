@@ -88,7 +88,7 @@ class HeaderLinks extends React.Component {
 
 function mapStateToProps(state){
   return {
-    sign: state
+    sign: state.main
   }
 }
 function mapDispatchToProps(dispatch){

@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Table from "components/Table/Table.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import TextField from '@material-ui/core/TextField';
+import {connect} from 'react-redux'
 import MenuItem from '@material-ui/core/MenuItem';
 import GridItem from "components/Grid/GridItem.jsx";
 import Grid from '@material-ui/core/Grid'
@@ -10,6 +11,7 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import {moveUp, moveDown, deleteOne} from "../../actions/moveActions"
 import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 
 const styles = theme => ({
@@ -120,19 +122,20 @@ class EditExercise extends Component{
         <CardBody>
           <Grid container alignItems="flex-end">
           <Table 
-          tableData={this.state.arr.map((item, index)=> [
+          tableData={this.props.main.data.map((item, index)=> [
             <TextField
                   id="name"
                   label="Exercise name"
                   value={item.name}
-                  onChange={this.handleChange(index, 'name')}
+                  
                    />,
 
                    <TextField
                    id="measure"
+                   label="measurement"
                    select
                    value={item.measure}
-                   onChange={this.handleChange(index, 'measure')}
+                   
                  >
                    <MenuItem value="kilograms">Kilograms</MenuItem>
                    <MenuItem value="minutes">Minutes</MenuItem>
@@ -140,11 +143,11 @@ class EditExercise extends Component{
                  </TextField>,
            
           [
-            <Button color="info" onClick={this.moveUpper(index)}> <ArrowUpward /> </Button>,
+            <Button color="info" onClick={()=>this.props.moveUp(index)} > <ArrowUpward /> </Button>,
            
-            <Button color="info" onClick={this.moveDown(index)}> <ArrowDownward /> </Button>,
+            <Button color="info" onClick={()=>this.props.moveDown(index)}> <ArrowDownward /> </Button>,
            
-            <Button color="warning" onClick={this.deleteOne(index)}><AddCircle  /> </Button>
+            <Button color="warning" onClick={()=>this.props.deleteOne(index)}><AddCircle  /> </Button>
           ]
            
           
@@ -162,4 +165,18 @@ class EditExercise extends Component{
 
 
 
-export default withStyles(styles)(EditExercise);
+function mapStateToProps(state){
+  return {
+    main: state.exercises
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    moveUp: (index)=> dispatch(moveUp(index)),
+    moveDown: (index)=> dispatch(moveDown(index)),
+    deleteOne: (index)=> dispatch(deleteOne(index))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EditExercise));

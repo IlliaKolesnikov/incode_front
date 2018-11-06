@@ -4,7 +4,7 @@ import {signIn } from '../actions/signActions'
 
 function mapStateToProps(state){
     return{
-        sign: state
+        sign: state.main
     }
 }
 

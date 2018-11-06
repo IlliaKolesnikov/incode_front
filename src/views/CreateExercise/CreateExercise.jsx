@@ -9,13 +9,16 @@ import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
+import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from "components/Snackbar/Snackbar.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
-const styles = {
+const styles = theme =>({
   cardCategoryWhite: {
     "&,& a,& a:hover,& a:focus": {
       color: "rgba(255,255,255,.62)",
@@ -42,8 +45,12 @@ const styles = {
       fontWeight: "400",
       lineHeight: "1"
     }
-  }
-};
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    width: "99%"
+  },
+});
 
 class NewExercise extends React.Component {
   constructor(props) {
@@ -92,24 +99,28 @@ class NewExercise extends React.Component {
         <CardBody>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-                  <CustomInput
-                    labelText="Exercise name"
+            <FormControl  className={classes.formControl}>
+                  <TextField
+                    label="Exercise name"
                     id="exercisename"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
+                    fullWidth
                   />
+            </FormControl>
             </GridItem>
           </GridContainer>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-                  <CustomInput
-                    labelText="Measurement type"
+            <FormControl fullWidth className={classes.formControl}>
+                  <TextField
+                    label="Measurement type"
                     id="measuretype"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
+                    fullWidth
+                  >
+                  <MenuItem value="kilograms">Kilograms</MenuItem>
+                   <MenuItem value="minutes">Minutes</MenuItem>
+                   <MenuItem value="miles">Miles</MenuItem>
+                  </TextField>
+            </FormControl>
             </GridItem>
           </GridContainer>
           <GridContainer>
@@ -124,5 +135,6 @@ class NewExercise extends React.Component {
     );
   }
 }
+
 
 export default withStyles(styles)(NewExercise);

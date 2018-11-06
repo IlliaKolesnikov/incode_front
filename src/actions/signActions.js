@@ -9,8 +9,7 @@ export function signIn(userName, userPassword){
         })
 
         .then(json => { window.localStorage.setItem('token', json.data.data)
-        console.log(localStorage)
-        console.log(json)
+        console.log(localStorage.token)
         dispatch({
             type: "AUTH_SUCCESS",
             payload: json.data.mail

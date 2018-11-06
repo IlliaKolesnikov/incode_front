@@ -57,53 +57,8 @@ const styles = theme => ({
 });
 
 class EditExercise extends Component{
-  state = {
-    arr: [{
-      name: "Gym",
-      measure: "kilograms",
-    },
-    {
-      name: "Running",
-      measure: "miles"
-    },
-    {
-      name: "Lifting",
-      measure: "kilograms"
-    },
-    {
-      name: "Something else",
-      measure: "minutes"
-    }
-  ]
-  }
 
-  moveUpper = (index) => () =>{
-    let a = this.state.arr.slice();
-    if(index !== 0){
-    let k = a[index-1];
-    a[index-1] = a[index];
-    a[index] = k;
-    this.setState({arr: a})
-  }
-  }
-
-  moveDown = (index) => () =>{
-    let a = this.state.arr.slice();
-    if(index !== this.state.arr.length-1){
-      let k = a[index+1];
-      a[index+1] = a[index];
-      a[index] = k;
-      this.setState({arr: a})
-    }
-  }
-
-  deleteOne = (index) => () =>{
-    let a = this.state.arr.slice();
-    delete a[index];
-    this.setState({arr: a})
-  }
-
-  handleChange = (index, attribute) => event =>{
+ handleChange = (index, attribute) => event =>{
     let a = this.state.arr.slice(); 
     a[index][attribute] = event.target.value;
     this.setState({arr: a});
@@ -123,11 +78,10 @@ class EditExercise extends Component{
           <Grid container alignItems="flex-end">
           <Table 
           tableData={this.props.main.data.map((item, index)=> [
-            <TextField
+                  <TextField
                   id="name"
                   label="Exercise name"
                   value={item.name}
-                  
                    />,
 
                    <TextField
@@ -135,7 +89,6 @@ class EditExercise extends Component{
                    label="measurement"
                    select
                    value={item.measure}
-                   
                  >
                    <MenuItem value="kilograms">Kilograms</MenuItem>
                    <MenuItem value="minutes">Minutes</MenuItem>
@@ -146,11 +99,10 @@ class EditExercise extends Component{
             <Button color="info" onClick={()=>this.props.moveUp(index)} > <ArrowUpward /> </Button>,
            
             <Button color="info" onClick={()=>this.props.moveDown(index)}> <ArrowDownward /> </Button>,
-           
+          
             <Button color="warning" onClick={()=>this.props.deleteOne(index)}><AddCircle  /> </Button>
           ]
            
-          
       ]
       )}
           />

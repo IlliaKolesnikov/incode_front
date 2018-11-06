@@ -1,5 +1,3 @@
-import {onMove} from '../actions/moveActions'
-
 const initialState = {
     isAuth: false,
     error: null, 

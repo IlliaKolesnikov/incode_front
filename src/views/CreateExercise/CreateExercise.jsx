@@ -8,6 +8,7 @@ import AddAlert from "@material-ui/icons/AddAlert";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
+import {connect} from 'react-redux'
 import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
@@ -17,6 +18,7 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+import {createExercise} from '../../actions/createActions'
 
 const styles = theme =>({
   cardCategoryWhite: {
@@ -53,36 +55,16 @@ const styles = theme =>({
 });
 
 class NewExercise extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tl: false,
-      tc: false,
-      tr: false,
-      bl: false,
-      bc: false,
-      br: false
-    };
-  }
-  // to stop the warning of calling setState of unmounted component
-  componentWillUnmount() {
-    var id = window.setTimeout(null, 0);
-    while (id--) {
-      window.clearTimeout(id);
+  
+    state = {
+      title: "",
+      measureType: ""
     }
-  }
-  showNotification(place) {
-    var x = [];
-    x[place] = true;
-    this.setState(x);
-    this.alertTimeout = setTimeout(
-      function() {
-        x[place] = false;
-        this.setState(x);
-      }.bind(this),
-      6000
-    );
-  }
+
+    handleChange = (attribute) => event =>{
+      this.setState({[attribute]: event.target.value})
+    }
+  
   render() {
     const { classes } = this.props;
     return (
@@ -104,6 +86,7 @@ class NewExercise extends React.Component {
                     label="Exercise name"
                     id="exercisename"
                     fullWidth
+                    onChange={this.handleChange('title')}
                   />
             </FormControl>
             </GridItem>
@@ -115,6 +98,7 @@ class NewExercise extends React.Component {
                     label="Measurement type"
                     id="measuretype"
                     fullWidth
+                    onChange={this.handleChange('measureType')}
                   >
                   <MenuItem value="kilograms">Kilograms</MenuItem>
                    <MenuItem value="minutes">Minutes</MenuItem>
@@ -124,7 +108,7 @@ class NewExercise extends React.Component {
             </GridItem>
           </GridContainer>
           <GridContainer>
-              <Button color="primary">Create exercise</Button>
+              <Button color="primary" onClick={()=>this.props.createExercise(this.state.title, this.state.measureType)}>Create exercise</Button>
           </GridContainer>
  
 
@@ -136,5 +120,16 @@ class NewExercise extends React.Component {
   }
 }
 
+function mapStateToProps(state){
+  return{
+    exercise: state.exercises
+  }
+}
 
-export default withStyles(styles)(NewExercise);
+function mapDispatchToProps(dispatch){
+  return{
+    createExercise: (title, measureType, user) => dispatch(createExercise(title, measureType, user))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(NewExercise));

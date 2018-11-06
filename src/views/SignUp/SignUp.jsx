@@ -124,7 +124,7 @@ class SignUp extends Component{
             </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary" onClick={this.onRepeatCheck}>Sign up</Button>
+              <Button color="primary" onClick={()=>this.props.signUp(this.state.mail, this.state.password)}>Sign up</Button>
               <div><Link to={"/signin"} > Already have an account? Sign in</Link></div>
             </CardFooter>
           </Card>

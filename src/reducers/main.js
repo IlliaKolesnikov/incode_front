@@ -11,6 +11,10 @@ function main(state = initialState, action){
             return {...state, mail: null, error: null}
         case "ERROR_FOUND":
             return {...state, error: action.payload}
+        case "MESSAGE_CLOSED":
+            return {...state, error: null}
+        case "SET_ERROR":
+            return {...state, error: action.payload}
         default: 
             return state
     }

@@ -9,11 +9,10 @@ import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import {connect} from 'react-redux'
-import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem';
-import Snackbar from "components/Snackbar/Snackbar.jsx";
+//import Snackbar from "components/Snackbar/Snackbar.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -51,19 +50,20 @@ const styles = theme =>({
     margin: theme.spacing.unit,
     width: "99%"
   },
+  
 });
 
 class NewExercise extends React.Component {
   
     state = {
       title: "",
-      measureType: ""
+      measureType: "",
     }
 
     handleChange = (attribute) => event =>{
       this.setState({[attribute]: event.target.value})
     }
-  
+
   render() {
     const { classes } = this.props;
     return (

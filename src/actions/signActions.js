@@ -13,17 +13,11 @@ export function signIn(userName, userPassword){
             window.localStorage.setItem('token', json.data.data)
             const decoded = jwtDecode(json.data.data)
             window.localStorage.setItem('mail', decoded.mail)
-            dispatch({
-            type: "AUTH_SUCCESS",
-            //payload: json.data.mail
+            dispatch({type: "AUTH_SUCCESS"})
         })
-        
-    })
-    .catch(error=> {
-        dispatch({type: "ERROR_FOUND", 
-                payload: error.response.data.error}) 
-    }
-        )
+        .catch(error=> {
+        dispatch({type: "ERROR_FOUND", payload: error.response.data.error}) 
+        })
        
     }
 }
@@ -48,18 +42,12 @@ export function verifyUser(mail){
             console.log(decoded);
             window.localStorage.setItem('mail', decoded.mail)
             console.log(localStorage);
-            dispatch({
-                type: "AUTH_SUCCESS",
-               // payload: json.data.mail
+            dispatch({ type: "AUTH_SUCCESS",// payload: json.data.mail
             })
             
         })
         .catch(error=> {
-            dispatch({type: "ERROR_FOUND", 
-                    payload: error.response.data.error}) }
-            )
-        
-    
+            dispatch({type: "ERROR_FOUND", payload: error.response.data.error}) })
     }
 }
 
@@ -71,9 +59,21 @@ export function signUp(userName, userPassword){
                 password: userPassword
             })
             .catch(error=> {
-            dispatch({type: "ERROR_FOUND", 
-                payload: error.response.data.error}) 
+            dispatch({type: "ERROR_FOUND", payload: error.response.data.error}) 
                 //console.log(error.response.data.error)//2 минуты
             })
+    }
+}
+
+export function changeStatus(){
+    return {
+        type: "MESSAGE_CLOSED"
+    }
+}
+
+export function setError(message){
+    return {
+        type: "SET_ERROR",
+        payload: message
     }
 }

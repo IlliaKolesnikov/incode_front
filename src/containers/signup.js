@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import SignUp from "views/SignUp/SignUp.jsx";
-import {signUp} from '../actions/signActions'
+import {signUp, changeStatus, setError} from '../actions/signActions'
 
 function mapStateToProps(state){
     return{
@@ -10,6 +10,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return{
+        changeStatus: ()=>dispatch(changeStatus()),
+        setError: (message)=>dispatch(setError(message)),
         signUp: (userName, userPassword)=>dispatch(signUp(userName, userPassword)),
     }
 }

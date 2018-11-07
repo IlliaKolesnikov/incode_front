@@ -12,6 +12,7 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import {moveUp, moveDown, deleteOne} from "../../actions/moveActions"
+import {getData} from "../../actions/createActions"
 import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 
 const styles = theme => ({
@@ -58,6 +59,9 @@ const styles = theme => ({
 
 class EditExercise extends Component{
 
+  componentDidMount(){
+    this.props.getData()
+  }
  handleChange = (index, attribute) => event =>{
     let a = this.state.arr.slice(); 
     a[index][attribute] = event.target.value;
@@ -76,19 +80,21 @@ class EditExercise extends Component{
         </CardHeader>
         <CardBody>
           <Grid container alignItems="flex-end">
+          {this.props.main.isLoading ? 'Loading' : 
           <Table 
           tableData={this.props.main.data.map((item, index)=> [
                   <TextField
                   id="name"
                   label="Exercise name"
-                  value={item.name}
+                  value={item.title}
                    />,
 
                    <TextField
                    id="measure"
-                   label="measurement"
+                   label="Measurement"
                    select
-                   value={item.measure}
+                   fullWidth
+                   value={item.measureType}
                  >
                    <MenuItem value="kilograms">Kilograms</MenuItem>
                    <MenuItem value="minutes">Minutes</MenuItem>
@@ -105,7 +111,7 @@ class EditExercise extends Component{
            
       ]
       )}
-          />
+          />}
           </Grid>
           <GridContainer>
               <Button color="primary" >Update exercises</Button>
@@ -130,7 +136,8 @@ function mapDispatchToProps(dispatch){
   return {
     moveUp: (index)=> dispatch(moveUp(index)),
     moveDown: (index)=> dispatch(moveDown(index)),
-    deleteOne: (index)=> dispatch(deleteOne(index))
+    deleteOne: (index)=> dispatch(deleteOne(index)),
+    getData: ()=>dispatch(getData())
   }
 }
 

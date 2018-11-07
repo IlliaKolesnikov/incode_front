@@ -8,9 +8,9 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import Snackbar from '@material-ui/core/Snackbar';
+import MySnackbar from "components/CustomSnackBar/CustomSnack.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
-import CustomSnack from 'components/CustomSnackBar/CustomSnack.jsx'
 
 const styles = theme =>({
   cardCategoryWhite: {
@@ -37,16 +37,14 @@ class SignUp extends Component{
     mail: "",
     password: "",
     repeatPassword: "",
-    isShow: false
   }
   onRepeatCheck = () =>{
 
     if(this.state.password === this.state.repeatPassword){
-      this.setState({isShow: false})
-      this.props.signUp(this.state.mail, this.state.password);
+      this.props.signUp(this.state.mail, this.state.password)
     }
     else{
-      this.setState({isShow: true})
+      this.props.setError("The password isn't correct. Please try again")
     }
   }
   
@@ -61,13 +59,27 @@ class SignUp extends Component{
   }
   
   render(){
-    if(this.props.sign.error){
-      console.log(this.props.sign.error)
-    }
   const { classes } = this.props;
+  const { error } = this.props.sign;
   return (
     <div>
       <GridContainer>
+      {error ? 
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          open
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <MySnackbar
+            onClose={this.props.changeStatus}
+            variant="error"
+            message={error}
+          />
+          </Snackbar>: null}
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary">
@@ -119,12 +131,11 @@ class SignUp extends Component{
                       onChange: this.onRepeatPasswordChange
                     }}
                   />
-                  {this.state.isShow ? "The password isn't correct. Please try again" :  null}
                 </GridItem>
             </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary" onClick={()=>this.props.signUp(this.state.mail, this.state.password)}>Sign up</Button>
+              <Button color="primary" onClick={this.onRepeatCheck}>Sign up</Button>
               <div><Link to={"/signin"} > Already have an account? Sign in</Link></div>
             </CardFooter>
           </Card>

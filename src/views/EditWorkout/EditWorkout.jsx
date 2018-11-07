@@ -166,6 +166,9 @@ class EditWorkout extends Component{
               
                 />
                 </Grid>
+                <GridContainer>
+              <Button color="primary" >Update workout</Button>
+               </GridContainer>
       </CardBody>
       </Card>
       </GridItem>

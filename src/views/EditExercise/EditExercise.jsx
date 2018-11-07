@@ -107,6 +107,9 @@ class EditExercise extends Component{
       )}
           />
           </Grid>
+          <GridContainer>
+              <Button color="primary" >Update exercises</Button>
+          </GridContainer>
       </CardBody>
       </Card>
       </GridItem>

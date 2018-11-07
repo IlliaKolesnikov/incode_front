@@ -1,4 +1,5 @@
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 
 
 export function signIn(userName, userPassword){
@@ -8,11 +9,13 @@ export function signIn(userName, userPassword){
             password: userPassword
         })
 
-        .then(json => { window.localStorage.setItem('token', json.data.data)
-        console.log(localStorage.token)
-        dispatch({
+        .then(json => { 
+            window.localStorage.setItem('token', json.data.data)
+            const decoded = jwtDecode(json.data.data)
+            window.localStorage.setItem('mail', decoded.mail)
+            dispatch({
             type: "AUTH_SUCCESS",
-            payload: json.data.mail
+            //payload: json.data.mail
         })
         
     })
@@ -28,6 +31,7 @@ export function signIn(userName, userPassword){
 export function signOut(userName, userPassword){
     return dispatch=>{
         window.localStorage.setItem('token', "");
+        window.localStorage.setItem('mail', "");
         console.log(localStorage)
         dispatch({type: "LOG_OUT"})
     }
@@ -40,10 +44,13 @@ export function verifyUser(mail){
         })
         .then(json => { 
             window.localStorage.setItem('token', json.data.data)
+            const decoded = jwtDecode(json.data.data)
+            console.log(decoded);
+            window.localStorage.setItem('mail', decoded.mail)
             console.log(localStorage);
             dispatch({
                 type: "AUTH_SUCCESS",
-                payload: json.data.mail
+               // payload: json.data.mail
             })
             
         })

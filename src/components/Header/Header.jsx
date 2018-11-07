@@ -18,7 +18,7 @@ import headerStyle from "assets/jss/material-dashboard-react/components/headerSt
 function Header({ ...props }) {
   function makeBrand() {
     var name;
-    props.isAuth ? props.dashboardRoutes.map((prop, key) => {
+    localStorage.token !== "" ? props.dashboardRoutes.map((prop, key) => {
       if (prop.path === props.location.pathname) {
         name = prop.navbarName;
       }
@@ -54,7 +54,7 @@ function Header({ ...props }) {
         </div>
         <Hidden smDown implementation="css">
           <HeaderLinks 
-          visible={props.isAuth ? true : false}
+          visible={localStorage.token !== "" ? true : false}
           />
         </Hidden>
         <Hidden mdUp implementation="css">

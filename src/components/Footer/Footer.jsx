@@ -19,7 +19,7 @@ function Footer({ ...props }) {
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list} >
-                {props.isAuth ? dashboardRoutes.map((item, index)=>{
+                {localStorage.token !== "" ? dashboardRoutes.map((item, index)=>{
 
                     return <ListItem key={index} className={classes.inlineBlock}>
                       <Link to={item.path} className={classes.block}>

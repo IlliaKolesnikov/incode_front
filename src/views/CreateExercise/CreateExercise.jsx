@@ -17,7 +17,6 @@ import Snackbar from "components/Snackbar/Snackbar.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
 import {createExercise} from '../../actions/createActions'
 
 const styles = theme =>({
@@ -97,6 +96,8 @@ class NewExercise extends React.Component {
                   <TextField
                     label="Measurement type"
                     id="measuretype"
+                    value={this.state.measureType}
+                    select
                     fullWidth
                     onChange={this.handleChange('measureType')}
                   >

@@ -76,11 +76,10 @@ class App extends React.Component {
   }
   render() {
     const { classes, ...rest } = this.props;
-    const {isAuth} = this.props.main
     return (
       <div className={classes.wrapper}>
         <Sidebar
-          routes={isAuth ? dashboardRoutes : authRoutes}
+          routes={localStorage.token !== "" ? dashboardRoutes : authRoutes}
           logoText={"Fit Trainer"}
           logo={logo}
           image={image}
@@ -91,18 +90,18 @@ class App extends React.Component {
         />
         <div className={classes.mainPanel} ref="mainPanel">
           <Header
-            isAuth={isAuth}
+            isAuth={localStorage.token !== ""}
             dashboardRoutes={dashboardRoutes}
             authRoutes={authRoutes}
-            routes={isAuth ? dashboardRoutes : authRoutes}
+            routes={localStorage.token !== "" ? dashboardRoutes : authRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
-          { isAuth ? 
+          { localStorage.token !== "" ? 
           (<div className={classes.map}>{switchRoutes}</div>) 
           :(<div className={classes.map}>{authorRoutes}</div>)}
           
-           <Footer isAuth={isAuth}/>
+           <Footer isAuth={localStorage.token !== ""}/>
         </div>
       </div>
     );

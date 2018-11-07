@@ -44,7 +44,7 @@ class HeaderLinks extends React.Component {
       <div>
         <GridContainer alignItems="center" >
           <GridItem>
-            <FormLabel> {this.props.sign.mail} </FormLabel>
+            <FormLabel> {localStorage.mail} </FormLabel>
           </GridItem>
           <GridItem> {//выпадающий Sign Out на кнопку
           }

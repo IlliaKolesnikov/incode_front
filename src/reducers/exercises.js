@@ -3,7 +3,7 @@ import {onMove} from '../actions/moveActions'
 const initialState = {
     isLoading: true,
     data: [],
-    error: null
+    error: null,
 }
 
 function exercises(state = initialState, action){

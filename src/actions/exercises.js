@@ -9,12 +9,28 @@ export function createExercise(title, measureType){
             token: localStorage.token
         })
         .then(json=> console.log(json))
-        .catch(error=> { console.log(error)
+        .catch(error=> { console.log(error.response.data.error)
             dispatch({type: "ERROR_FOUND", 
                     payload: error.response.data.error}) 
         })
     }
 }
+
+export function updateExercises(newArray){
+    return dispatch=>{
+        axios.put("/api/updateexercise", {
+            newArray: newArray, 
+            token: localStorage.token
+        })
+        
+        .then(json=> console.log(json))
+        .catch(error=> {
+            dispatch({type: "ERROR_FOUND", 
+                    payload: error.response.data.error}) 
+        })
+    }
+}
+
 
 export function getData(){
     return dispatch=>{

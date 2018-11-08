@@ -12,7 +12,7 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import {moveUp, moveDown, deleteOne} from "../../actions/moveActions"
-import {getData} from "../../actions/createActions"
+import {getData, updateExercises} from "../../actions/exercises"
 import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 
 const styles = theme => ({
@@ -106,7 +106,7 @@ class EditExercise extends Component{
            
             <Button color="info" onClick={()=>this.props.moveDown(index)}> <ArrowDownward /> </Button>,
           
-            <Button color="warning" onClick={()=>this.props.deleteOne(index)}><AddCircle  /> </Button>
+            <Button color="warning" onClick={()=>this.props.deleteOne(index, item)}><AddCircle  /> </Button>
           ]
            
       ]
@@ -114,7 +114,7 @@ class EditExercise extends Component{
           />}
           </Grid>
           <GridContainer>
-              <Button color="primary" >Update exercises</Button>
+              <Button color="primary" onClick={()=>this.props.updateExercises(this.props.main.data)}>Update exercises</Button>
           </GridContainer>
       </CardBody>
       </Card>
@@ -136,8 +136,9 @@ function mapDispatchToProps(dispatch){
   return {
     moveUp: (index)=> dispatch(moveUp(index)),
     moveDown: (index)=> dispatch(moveDown(index)),
-    deleteOne: (index)=> dispatch(deleteOne(index)),
-    getData: ()=>dispatch(getData())
+    deleteOne: (index, item)=> dispatch(deleteOne(index, item)),
+    getData: ()=>dispatch(getData()),
+    updateExercises: (newArray)=>dispatch(updateExercises(newArray))
   }
 }
 

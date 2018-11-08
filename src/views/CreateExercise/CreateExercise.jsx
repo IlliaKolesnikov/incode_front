@@ -16,7 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import {createExercise} from '../../actions/createActions'
+import {createExercise} from '../../actions/exercises'
 
 const styles = theme =>({
   cardCategoryWhite: {

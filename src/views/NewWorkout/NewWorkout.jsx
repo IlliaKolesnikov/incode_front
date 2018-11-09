@@ -7,10 +7,15 @@ import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel';
 import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
+import {connect} from 'react-redux'
+import FormControl from '@material-ui/core/FormControl'
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import Table from "components/Table/Table.jsx";
+import MenuItem from '@material-ui/core/MenuItem';
+import {createWorkout} from "../../actions/workouts"
+import {getData} from "../../actions/exercises"
 
 const styles = {
   
@@ -54,32 +59,19 @@ const styles = {
   }
 };
 
-class EditExercise extends Component {
-
+class NewWorkout extends Component {
   state = {
     arr: [{
-      name: "Gym",
-      repeats: 15,
-      measure: "kilograms",
-    },
-    {
-      name: "Running",
-      repeats: 1,
-      measure: "miles"
-    },
-    {
-      name: "Lifting",
-      repeats: 25,
-      measure: "kilograms"
-    },
-    {
-      name: "Something else",
-      repeats: 5,
-      measure: "minutes"
-    }
-  ]
+      name: "sasha",
+      
+    }]
   }
-
+  componentDidMount(){
+    this.props.getData()
+  }
+    
+      
+  
   moveUpper = (index) => () =>{
     let a = this.state.arr.slice();
     if(index !== 0){
@@ -111,8 +103,17 @@ class EditExercise extends Component {
     a[index][attribute] = event.target.value;
     this.setState({arr: a});
   }
+
+  addExercise = () =>{
+    let a = this.state.arr.slice();
+    a.unshift({name: "", repeats: "", measure: ""})
+    this.setState({arr: a})
+  }
   render(){
     const { classes } = this.props;
+    const {exercisesToChoose} = this.props.workouts
+    const { arr } = this.state
+    {console.log(exercisesToChoose.map((item, index)=> console.log(item._id)))}
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={10}>
@@ -122,26 +123,31 @@ class EditExercise extends Component {
         </CardHeader>
         <CardBody>
         <GridContainer>
-            <Button color="primary"className={classes.addExercise}>Add exercise</Button>
+            <Button color="primary"className={classes.addExercise} onClick={this.addExercise}>Add exercise</Button>
         </GridContainer>
-        <Grid container alignItems="center">
+        <Grid container alignItems="flex-end">
             <Table
                   tableHeaderColor="warning"
-                  tableData= {this.state.arr.map((item, index)=> [
+                  tableData= {arr === [] ? "Please add at least one exercise" : arr.map((item, index)=> [
+                    
                         <TextField
                               id="name"
                               label="Exercise name"
                               value={item.name}
-                            
+                              fullWidth
+                              select
                               onChange={this.handleChange(index, 'name')}
-                               />,
-
+                               > 
+                              { exercisesToChoose.map((item, index)=>{
+                                return <MenuItem value={item._id}>{item.title}</MenuItem>
+                             })}
+                               </TextField>
+                    ,
 
                         <TextField
                                 id="repeat"
                                 label="Repeats"
                                 value={item.repeats}
-                               
                                 onChange={this.handleChange(index, 'repeats')}
                               />,
 
@@ -150,9 +156,11 @@ class EditExercise extends Component {
                                 id="measure"
                                 label="Measurement"
                                 value={item.measure}
+                                fullWidth
                                 onChange={this.handleChange(index, 'measure')}
-                              />,
-                        <FormLabel> kg</FormLabel>],
+                        >
+                        </TextField>,
+                        <FormLabel> </FormLabel>],
                        
                       [
                         <Button color="info" onClick={this.moveUpper(index)}> <ArrowUpward /> </Button>,
@@ -170,7 +178,7 @@ class EditExercise extends Component {
                 />
                 </Grid>
           <GridContainer>
-              <Button color="primary" className={classes.createWorkout}>Create workout</Button>
+              <Button color="primary" className={classes.createWorkout} onClick={()=> this.props.createWorkout(arr)}>Create workout</Button>
           </GridContainer>
         </CardBody>
       </Card>
@@ -179,6 +187,19 @@ class EditExercise extends Component {
   }
 }
 
+function mapStateToProps(state){
+  return{
+    workouts: state.workouts
+  }
+}
 
 
-export default withStyles(styles)(EditExercise);
+function mapDispatchToProps(dispatch){
+  return{
+    createWorkout: (arrWithData) => dispatch(createWorkout(arrWithData)),
+    getData: () => dispatch(getData())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)
+(withStyles(styles)(NewWorkout));

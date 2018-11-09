@@ -109,7 +109,7 @@ class NewExercise extends React.Component {
             </GridItem>
           </GridContainer>
           <GridContainer>
-              <Button color="primary" onClick={()=>this.props.createExercise(this.state.title, this.state.measureType)}>Create exercise</Button>
+              <Button color="primary" onClick={()=>this.props.createExercise(this.state.title, this.state.measureType, this.props.exercise.data)}>Create exercise</Button>
           </GridContainer>
  
 

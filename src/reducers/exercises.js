@@ -3,7 +3,7 @@ import {onMove} from '../actions/moveActions'
 const initialState = {
     isLoading: true,
     data: [],
-    error: null,
+    error: null
 }
 
 function exercises(state = initialState, action){
@@ -17,6 +17,8 @@ function exercises(state = initialState, action){
         case "DELETE_ONE":
             data = onMove(action.payload, state.data, "delete")
             return {...state, data: data}
+        case "CHANGE_FIELDS":
+            return {...state}
         case "GET_EXERCISES_BEGIN":
             return state
         case "GET_EXERCISES_SUCCESS":

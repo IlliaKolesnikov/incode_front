@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-export function createExercise(title, measureType){
+export function createExercise(title, measureType, data){
     return dispatch=>{
         console.log(title, measureType)
         axios.post("/api/createexercise", {
             title: title,
-            measureType: measureType, 
+            measureType: measureType,
+            data: data, 
             token: localStorage.token
         })
         .then(json=> console.log(json))

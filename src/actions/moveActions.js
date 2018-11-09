@@ -24,16 +24,18 @@ export function deleteOne(index, objToDelete){
 }
 
 export function onMove(index, arr, where){
+    console.log(arr)
     if(where === "up"){
         if(index !== 0){
             let copy = arr.slice();
-            console.log(copy[index-1].order, copy[index].order)
+            //console.log(copy[index-1].order)
+            //console.log(copy[index-1].order, copy[index].order)
             let k = copy[index-1];
             copy[index-1] = copy[index];
             copy[index-1].order = k.order;
             copy[index] = k;
             copy[index].order +=1;
-            console.log(copy[index-1].order, copy[index].order)
+            //console.log(copy[index-1].order, copy[index].order)
             return copy
         }
         else{

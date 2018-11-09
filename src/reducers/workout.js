@@ -1,8 +1,10 @@
 import {onMove} from '../actions/moveActions'
 
 const initialState = {
+    isLoading: true,
     data: [],
-    error: null
+    error: null,
+    exercisesToChoose: []
 }
 
 function workouts(state = initialState, action){
@@ -16,11 +18,11 @@ function workouts(state = initialState, action){
         case "DELETE_ONE":
             data = onMove(action.payload, state.data, "delete")
             return {...state, data: data}
-        case "GET_WORKOUT_BEGIN":
+        case "GET_EXERCISES_BEGIN":
             return state
-        case "GET_WORKOUT_SUCCESS":
-            return {...state, data: action.payload, isLoading: false}
-        case "GET_WORKOUT_ERROR":
+        case "GET_EXERCISES_SUCCESS":
+            return {...state, exercisesToChoose: action.payload, isLoading: false}
+        case "GET_EXERCISES_ERROR":
             return {...state, error: action.payload}
             //post request on update 
         default: 

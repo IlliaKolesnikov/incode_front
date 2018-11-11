@@ -112,8 +112,8 @@ class SignUp extends Component{
                       fullWidth: true,
                     }}
                     inputProps={{
-                      onChange: this.onPasswordChange
-                      //type: "oassword"
+                      onChange: this.onPasswordChange,
+                      type: "password"
                     }}
                   />
                 </GridItem>
@@ -128,7 +128,8 @@ class SignUp extends Component{
                       fullWidth: true
                     }}
                     inputProps={{
-                      onChange: this.onRepeatPasswordChange
+                      onChange: this.onRepeatPasswordChange,
+                      type: "password"
                     }}
                   />
                 </GridItem>

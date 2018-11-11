@@ -88,7 +88,6 @@ class EditExercise extends Component{
                   label="Exercise name"
                   value={item.title}
                    />,
-
                    <TextField
                    id="measure"
                    label="Measurement"

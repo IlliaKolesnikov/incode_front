@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 export function moveUp(index){
-    return dispatch=>{
-        dispatch({type: "MOVE_UPPER", payload: index})
+    return {
+        type: "MOVE_UPPER", payload: index
     }
 }
 
 export function moveDown(index){
-    return dispatch=>{
-        dispatch({type: "MOVE_DOWN", payload: index})
+    return {
+        type: "MOVE_DOWN", payload: index
     }
 }
 
@@ -23,20 +23,41 @@ export function deleteOne(index, objToDelete){
     }
 }
 
+export function moveEWUp(index){
+    return {
+        type: "MOVE_UPPER_W", payload: index
+    }
+}
+
+export function moveEWDown(index){
+    return {
+        type: "MOVE_DOWN_W", payload: index
+    }
+}
+
+export function deleteEWOne(index, objToDelete, data){
+    return dispatch=>{
+        axios.post("/api/deletewexercise", {
+            itemToDelete: objToDelete,
+            token: localStorage.token,
+            data: data._id
+        })
+        .then(json=> console.log(json))
+        dispatch({type: "DELETE_ONE_W", payload: index})
+    }
+}
+
 export function onMove(index, arr, where){
-    console.log(arr)
     if(where === "up"){
         if(index !== 0){
             let copy = arr.slice();
-            //console.log(copy[index-1].order)
-            //console.log(copy[index-1].order, copy[index].order)
             let k = copy[index-1];
             copy[index-1] = copy[index];
             copy[index-1].order = k.order;
             copy[index] = k;
             copy[index].order +=1;
-            //console.log(copy[index-1].order, copy[index].order)
             return copy
+             
         }
         else{
             return arr
@@ -45,13 +66,11 @@ export function onMove(index, arr, where){
     if(where === "down"){
         if(index !== arr.length - 1){
             let copy = arr.slice();
-            console.log("Down start:", copy[index+1].order, copy[index].order)
             let k = copy[index+1];
             copy[index+1] = copy[index];
             copy[index+1].order = k.order;
             copy[index] = k;
             copy[index].order -=1;
-            console.log("Down:", copy[index+1].order, copy[index].order)
             return copy
         }
         else{
@@ -60,7 +79,45 @@ export function onMove(index, arr, where){
     }
     if(where === "delete"){
         arr.splice(index, 1)
-        //здесь нужно сделать присвоение следующему элементу нового order
+        return arr
+    }
+}
+
+export function onEWMove(index, arr, where){
+    if(where === "up"){
+        if(index !== 0){
+            let copy = arr.exercises.slice();
+            let k = copy[index-1];
+            copy[index-1] = copy[index];
+            copy[index-1].order = k.order;
+            copy[index] = k;
+            copy[index].order +=1;
+              arr.exercises = copy;
+            return arr
+             
+        }
+        else{
+            return arr
+        }
+    }
+    if(where === "down"){
+
+        if(index !== arr.exercises.length-1 ){
+            let copy = arr.exercises.slice();
+            let k = copy[index+1];
+            copy[index+1] = copy[index];
+            copy[index+1].order = k.order;
+            copy[index] = k;
+            copy[index].order -=1;
+            arr.exercises = copy;
+            return arr
+        }
+        else{
+            return arr
+        }
+    }
+    if(where === "delete"){
+        arr.exercises.splice(index, 1)
         return arr
     }
 }

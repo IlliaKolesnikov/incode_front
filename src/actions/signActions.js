@@ -60,7 +60,6 @@ export function signUp(userName, userPassword){
             })
             .catch(error=> {
             dispatch({type: "ERROR_FOUND", payload: error.response.data.error}) 
-                //console.log(error.response.data.error)//2 минуты
             })
     }
 }

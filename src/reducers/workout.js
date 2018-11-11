@@ -1,7 +1,8 @@
-import {onMove} from '../actions/moveActions'
+import {onEWMove} from '../actions/moveActions'
 
 const initialState = {
     isLoading: true,
+    isFetching: true,
     data: [],
     error: null,
     exercisesToChoose: []
@@ -9,15 +10,21 @@ const initialState = {
 
 function workouts(state = initialState, action){
     switch(action.type){
-        case "MOVE_UPPER":
-            let data = onMove(action.payload, state.data, "up")
+        case "MOVE_UPPER_W":
+            let data = onEWMove(action.payload, state.data, "up")
             return {...state, data: data}
-        case "MOVE_DOWN": 
-            data = onMove(action.payload, state.data, "down")
+        case "MOVE_DOWN_W": 
+            data = onEWMove(action.payload, state.data, "down")
             return {...state, data: data}
-        case "DELETE_ONE":
-            data = onMove(action.payload, state.data, "delete")
+        case "DELETE_ONE_W":
+            data = onEWMove(action.payload, state.data, "delete")
             return {...state, data: data}
+        case "GET_WORKOUT_BEGIN":
+            return state
+        case "GET_WORKOUT_SUCCESS":
+            return {...state, data: action.payload, isFetching: false}
+        case "GET_WORKOUT_ERROR":
+            return {...state, error: action.payload}
         case "GET_EXERCISES_BEGIN":
             return state
         case "GET_EXERCISES_SUCCESS":

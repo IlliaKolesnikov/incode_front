@@ -105,7 +105,8 @@ class SignIn extends Component{
                       fullWidth: true
                     }}
                     inputProps={{
-                      onChange: this.onPasswordChange
+                      onChange: this.onPasswordChange,
+                      type: "password"
                     }}
                   />
                 </GridItem>

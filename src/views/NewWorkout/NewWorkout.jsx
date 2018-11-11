@@ -113,7 +113,6 @@ class NewWorkout extends Component {
     const { classes } = this.props;
     const {exercisesToChoose} = this.props.workouts
     const { arr } = this.state
-    {console.log(exercisesToChoose.map((item, index)=> console.log(item._id)))}
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={10}>

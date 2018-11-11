@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import {connect} from 'react-redux'
 import Table from "components/Table/Table.jsx";
 import Grid from '@material-ui/core/Grid';
 import Button from "components/CustomButtons/Button.jsx";
@@ -10,6 +11,7 @@ import Card from "components/Card/Card.jsx";
 import FormLabel from '@material-ui/core/FormLabel';
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import { getData, getWorkout, updateWorkout, moveEWUp, moveEWDown, deleteEWOne } from '../../actions/workouts'
 import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 
 const styles = theme => ({
@@ -54,55 +56,6 @@ const styles = theme => ({
 });
 
 class EditWorkout extends Component{
-  state = {
-    arr: [{
-      name: "Gym",
-      repeats: 15,
-      measure: "kilograms",
-    },
-    {
-      name: "Running",
-      repeats: 1,
-      measure: "miles"
-    },
-    {
-      name: "Lifting",
-      repeats: 25,
-      measure: "kilograms"
-    },
-    {
-      name: "Something else",
-      repeats: 5,
-      measure: "minutes"
-    }
-  ]
-  }
-
-  moveUpper = (index) => () =>{
-    let a = this.state.arr.slice();
-    if(index !== 0){
-    let k = a[index-1];
-    a[index-1] = a[index];
-    a[index] = k;
-    this.setState({arr: a})
-  }
-  }
-
-  moveDown = (index) => () =>{
-    let a = this.state.arr.slice();
-    if(index !== this.state.arr.length-1){
-      let k = a[index+1];
-      a[index+1] = a[index];
-      a[index] = k;
-      this.setState({arr: a})
-    }
-  }
-
-  deleteOne = (index) => () =>{
-    let a = this.state.arr.slice();
-    delete a[index];
-    this.setState({arr: a})
-  }
 
   handleChange = (index, attribute) => event =>{
     let a = this.state.arr.slice(); 
@@ -110,8 +63,12 @@ class EditWorkout extends Component{
     this.setState({arr: a});
   }
 
+  componentDidMount(){
+    this.props.getWorkout()
+  }
   render(){
     const { classes } = this.props;
+    const {data, isLoading, isFetching} = this.props.workouts
   return (
     <GridContainer >
         <GridItem xs={12} sm={12} md={10} >
@@ -122,13 +79,14 @@ class EditWorkout extends Component{
         <CardBody>
           
             <Grid container alignItems="center">
+              {isFetching ? 'Loading' : 
             <Table
                   tableHeaderColor="warning"
-                  tableData= {this.state.arr.map((item, index)=> [
+                  tableData= {data.exercises.sort((a,b) => a.order - b.order).map((item, index)=> [
                         <TextField
                               id="name"
                               label="Exercise name"
-                              value={item.name}
+                              value={item.exercise.title}
                             
                               onChange={this.handleChange(index, 'name')}
                                />,
@@ -149,14 +107,14 @@ class EditWorkout extends Component{
                                 value={item.measure}
                                 onChange={this.handleChange(index, 'measure')}
                               />,
-                        <FormLabel> kg</FormLabel>],
+                        <FormLabel>{item.exercise.measureType}</FormLabel>],
                        
                       [
-                        <Button color="info" onClick={this.moveUpper(index)}> <ArrowUpward /> </Button>,
+                        <Button color="info" onClick={()=>this.props.moveEWUp(index)}> <ArrowUpward /> </Button>,
            
-                        <Button color="info" onClick={this.moveDown(index)}> <ArrowDownward /> </Button>,
+                        <Button color="info" onClick={()=>this.props.moveEWDown(index)}> <ArrowDownward /> </Button>,
            
-                        <Button color="warning" onClick={this.deleteOne(index)}><AddCircle  /> </Button>
+                        <Button color="warning" onClick={()=>this.props.deleteEWOne(index, item, data)}><AddCircle  /> </Button>
                       ]
                        
                       
@@ -164,10 +122,10 @@ class EditWorkout extends Component{
                   )}
                
               
-                />
+                />}
                 </Grid>
                 <GridContainer>
-              <Button color="primary" >Update workout</Button>
+              <Button color="primary" onClick={()=>this.props.updateWorkout(this.props.workouts.data)} >Update workout</Button>
                </GridContainer>
       </CardBody>
       </Card>
@@ -178,5 +136,23 @@ class EditWorkout extends Component{
 }
 
 
+function mapStateToProps(state){
+  return{
+    workouts: state.workouts
+  }
+}
 
-export default withStyles(styles)(EditWorkout);
+
+function mapDispatchToProps(dispatch){
+  return{
+    moveEWUp: (index)=> dispatch(moveEWUp(index)),
+    moveEWDown: (index)=> dispatch(moveEWDown(index)),
+    deleteEWOne: (index, item, arr)=> dispatch(deleteEWOne(index, item, arr)),
+    getData: () => dispatch(getData()),
+    getWorkout: ()=>dispatch(getWorkout()),
+    updateWorkout: (newArray)=>dispatch(updateWorkout(newArray))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)
+(withStyles(styles)(EditWorkout));

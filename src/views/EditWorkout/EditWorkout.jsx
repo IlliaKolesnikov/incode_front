@@ -57,11 +57,7 @@ const styles = theme => ({
 
 class EditWorkout extends Component{
 
-  handleChange = (index, attribute) => event =>{
-    let a = this.state.arr.slice(); 
-    a[index][attribute] = event.target.value;
-    this.setState({arr: a});
-  }
+ 
 
   componentDidMount(){
     this.props.getWorkout()
@@ -87,8 +83,6 @@ class EditWorkout extends Component{
                               id="name"
                               label="Exercise name"
                               value={item.exercise.title}
-                            
-                              onChange={this.handleChange(index, 'name')}
                                />,
 
 
@@ -96,8 +90,6 @@ class EditWorkout extends Component{
                                 id="repeat"
                                 label="Repeats"
                                 value={item.repeats}
-                               
-                                onChange={this.handleChange(index, 'repeats')}
                               />,
 
                               
@@ -105,7 +97,6 @@ class EditWorkout extends Component{
                                 id="measure"
                                 label="Measurement"
                                 value={item.measure}
-                                onChange={this.handleChange(index, 'measure')}
                               />,
                         <FormLabel>{item.exercise.measureType}</FormLabel>],
                        
@@ -116,12 +107,8 @@ class EditWorkout extends Component{
            
                         <Button color="warning" onClick={()=>this.props.deleteEWOne(index, item, data)}><AddCircle  /> </Button>
                       ]
-                       
-                      
                   ]
                   )}
-               
-              
                 />}
                 </Grid>
                 <GridContainer>

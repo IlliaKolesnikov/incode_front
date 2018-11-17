@@ -8,8 +8,7 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-import Snackbar from '@material-ui/core/Snackbar';
-import MySnackbar from "components/CustomSnackBar/CustomSnack.jsx";
+import Snackbar from "components/Snackbar/Snackbar.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
 const styles = {
   cardCategoryWhite: {
@@ -58,21 +57,12 @@ class SignIn extends Component{
     <div>
       <GridContainer>
         {error ? 
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-          open
-          autoHideDuration={6000}
-          onClose={this.handleClose}
-        >
-          <MySnackbar
+          <Snackbar 
             onClose={this.props.changeStatus}
             variant="error"
             message={error}
           />
-          </Snackbar>: null}
+          : null}
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary">

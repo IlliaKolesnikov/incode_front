@@ -11,6 +11,7 @@ import Card from "components/Card/Card.jsx";
 import FormLabel from '@material-ui/core/FormLabel';
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import MenuItem from '@material-ui/core/MenuItem';
 import { getData, getWorkout, updateWorkout, moveEWUp, moveEWDown, deleteEWOne } from '../../actions/workouts'
 import { ArrowUpward, ArrowDownward, AddCircle } from '@material-ui/icons'
 
@@ -57,14 +58,12 @@ const styles = theme => ({
 
 class EditWorkout extends Component{
 
- 
-
   componentDidMount(){
     this.props.getWorkout()
   }
   render(){
     const { classes } = this.props;
-    const {data, isLoading, isFetching} = this.props.workouts
+    const { data, isFetching, exercisesToChoose } = this.props.workouts
   return (
     <GridContainer >
         <GridItem xs={12} sm={12} md={10} >
@@ -75,16 +74,20 @@ class EditWorkout extends Component{
         <CardBody>
           
             <Grid container alignItems="center">
-              {isFetching ? 'Loading' : 
+              { isFetching ? 'Loading' : 
             <Table
                   tableHeaderColor="warning"
                   tableData= {data.exercises.sort((a,b) => a.order - b.order).map((item, index)=> [
                         <TextField
                               id="name"
                               label="Exercise name"
+                              //select
                               value={item.exercise.title}
-                               />,
-
+                               >
+                               {/* exercisesToChoose.map((item, index)=>{
+                                return <MenuItem value={item._id}>{item.title}</MenuItem>
+                             })*/}
+                        </TextField>,
 
                         <TextField
                                 id="repeat"

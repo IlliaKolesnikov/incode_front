@@ -14,6 +14,7 @@ export function signIn(userName, userPassword){
             const decoded = jwtDecode(json.data.data)
             window.localStorage.setItem('mail', decoded.mail)
             dispatch({type: "AUTH_SUCCESS"})
+            console.log(window.localStorage.getItem('token', json.data.data))
         })
         .catch(error=> {
         dispatch({type: "ERROR_FOUND", payload: error.response.data.error}) 
@@ -41,7 +42,7 @@ export function verifyUser(mail){
             const decoded = jwtDecode(json.data.data)
             console.log(decoded);
             window.localStorage.setItem('mail', decoded.mail)
-            console.log(localStorage);
+             console.log(window.localStorage.getItem('token', json.data.data))
             dispatch({ type: "AUTH_SUCCESS",// payload: json.data.mail
             })
             
